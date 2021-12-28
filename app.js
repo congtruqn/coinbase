@@ -103,6 +103,7 @@ const options = {
   useNewUrlParser: true
 };
 var db = mongoose.connect("mongodb://210.211.108.228/coinbase",options);
+app.use('/products', products);
 app.use(function (req, res, next) {
     if (!req.user) {
       res.render('user/login', { title: 'Login', layout: 'login' });
