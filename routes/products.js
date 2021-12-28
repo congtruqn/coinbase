@@ -36,23 +36,22 @@ router.get('/images', function(req, res){
 router.get('/searchs', function(req, res){
   res.render('products/search',{layout: false});
 });
-router.post('/upload', multipartMiddleware,function(req, res) {
-  fs.readFile(req.files.file.path, function (err, data) {
+router.post('/upload',function(req, res) {
     var imageName = req.files.file.name
-    // If there's an error
     if(!imageName){
       res.status(200).json({imagesname:0})
     } else {
+      let sampleFile = req.files.file;
       var newPath=__basedir+"/public/uploads/"+imageName;
-      // write file to uploads/fullsize folder
-      fs.writeFile(newPath, data, function (err) {
-        // let's see it
+      sampleFile.mv(newPath, function(err) {
+        if (err)
+          return res.status(500).send(err);
         res.status(200).json({imagesname:imageName})
-        //res.redirect("/public/uploads/" + imageName);
       });
+      
     }
   });
-});
+
 router.post('/addproductres', function(req, res){
   var create_date = new Date().getTime();
   var createProduct = new Products({

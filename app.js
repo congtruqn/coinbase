@@ -12,7 +12,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-
+const fileUpload = require('express-fileupload');
 
 var app = express();
 var index = require('./routes/index');
@@ -46,7 +46,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
-
+app.use(fileUpload())
 // Express Session
 app.use(session({
     secret: 'secret',
@@ -90,6 +90,7 @@ app.use(function (req, res, next) {
 });
 app.use('/', index);
 app.use('/user', users);
+app.use('/products', products);
 var mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -103,7 +104,6 @@ const options = {
   useNewUrlParser: true
 };
 var db = mongoose.connect("mongodb://210.211.108.228/coinbase",options);
-app.use('/products', products);
 app.use(function (req, res, next) {
     if (!req.user) {
       res.render('user/login', { title: 'Login', layout: 'login' });
@@ -112,7 +112,6 @@ app.use(function (req, res, next) {
     }
 });
 app.use('/newscats', newscats);
-app.use('/products', products);
 app.use('/filemanager', filemanager);
 app.use('/productdetails', productdetails);
 app.use('/register', register);
