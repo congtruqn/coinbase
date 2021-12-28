@@ -15,9 +15,6 @@ var mongoose = require('mongoose');
 
 
 var app = express();
-var port = process.env.PORT || 8080;
-app.set('port', port);
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 var index = require('./routes/index');
 var filemanager = require('./routes/filemanager');
 var users = require('./routes/users');
