@@ -1,0 +1,67 @@
+<div ng-controller="salesController">
+<section class="content-header">
+	<h1>BÁN HÀNG</h1>
+	<ol class="breadcrumb">
+		<li><a><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+		<li><a></i>Bán hàng</a></li>
+	</ol>
+</section>
+<section class="panel1 panel-inverse">
+	<div class="row1">
+		<div class="sales_form">
+			<div class="choose_product">
+				<div class="search_product">
+					<div class="search_form">
+						<input class="form-control"  placeholder="Tên sản phẩm hoặc mã sản phẩm..."  ng-model="searchtext" id="searchtext" ng-change="SearchInstant()">
+					</div>
+					<div id="searchlucene">
+						<table class="search_table">
+							<tr ng-repeat="album in ProductList" ng-click="addToOrder(album._source.stockid)">
+								<td><span>{[{album._source.product_code}]}</span></td>
+								<td><img ng-src="/uploads/{[{album._source.image_name}]}"></td>
+		                		<td><span><b>{[{album._source.product_name}]}</b><br>{[{album._source.product_detail.detail_value}]}</span></td>
+		                		<td><span>{[{album._source.sell_price}]}</span></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="order_product">
+					<h1 class="order_product_title">Danh sách sản phẩm</h1>
+					<table class="order_product_table">
+						<tr ng-repeat="album in order.product">
+							<td><span>{[{album._source.product_code}]}</span></td>
+		                	<td><span>{[{album.product_name}]}</span></td>
+		                	<td><span>{[{album.sell_price}]}</span></td>
+		                	<td><span>{[{album.product_detail[0].detail_name}]} : {[{album.product_detail[0].detail_value}]}</span></td>
+		                	<td><span>{[{album.order_count}]}</span></td>
+						</tr>
+					</table>					
+				</div>
+			</div>
+			<div class="customer_info">
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Thành tiền</label>
+					<div class="col-sm-6"><label><b>{[{total_price}]}</b></label> Đ</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Giảm giá</label>
+					<div class="col-sm-8"><input class="form-control"  ng-model="saleoff_monney" required="false"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Điện thoại KH</label>
+					<div class="col-sm-8"><input class="form-control"  ng-model="customer_phone" required="false"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Tên khách hàng</label>
+					<div class="col-sm-8"><input class="form-control"  ng-model="customer_name" required="false"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label"></label>
+					<div class="col-sm-8"><button class="btn btn-primary" ng-click="finishorder(0)">THANH TOÁN</button></div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</section>
+</div>

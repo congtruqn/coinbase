@@ -1,0 +1,140 @@
+<div ng-controller="orderController">
+<section class="content">
+	<div class="row" ng-show="DivOrderUser">
+		<form action="" name="form">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Ngày tạo</label>
+			        <div class="col-sm-10"><input class="form-control" datepicker title="datepicker"  ng-model="create_date" type="text"></div>
+				</div>
+				<div class="form-group" id="hidden">
+					<label class="col-sm-2 control-label">Mã đơn hàng</label>
+					<div class="col-sm-10"><input class="form-control"  placeholder="Mã đơn hàng"  ng-model="order_code" required="false" readonly="true" hidden="true"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Mã đơn hàng</label>
+					<div class="col-sm-10"><input class="form-control"  placeholder="Mã đơn hàng"  ng-model="ordercode" required="false" readonly="true" hidden="true"></div>
+				</div>
+
+				<div class="form-group">
+						<label class="col-sm-2 control-label">Công ty</label>
+						<div class="col-sm-10">
+							<select name ="type" class="form-control"  ng-model="company" ng-options="companys as companys.fullname for companys in companybyuser" required="true">
+							</select>
+						</div>
+				</div>
+				
+				
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Địa chỉ nhận</label>
+					<div class="col-sm-10">
+						<div class="tns-sm-16">
+							<input class="form-control" type="text" placeholder="Địa chỉ nhận hàng"  ng-model="address">
+						</div>
+						<div class="col-sm-4">
+							<select name ="type" class="form-control"  ng-model="pickup_province" ng-options="provinces as provinces.Name for provinces in allprovince" required="true"></select>
+						</div>
+						<div class="tns-sm-6-right">
+							<input class="form-control" type="text" placeholder="Điện thoại"  ng-model="pickup_phone">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Địa chỉ giao</label>
+					<div class="col-sm-10">
+						<div class="tns-sm-16">
+							<input class="form-control" type="text" placeholder="Địa chỉ giao hàng"  ng-model="delivery_address">
+						</div>
+						<div class="col-sm-4">
+							<select name ="type" class="form-control"  ng-model="delivery_province" ng-options="provinces as provinces.Name for provinces in allprovince" required="true"></select>
+						</div>
+						<div class="tns-sm-6-right">
+							<input class="form-control" type="text" placeholder="Điện thoại"  ng-model="delivery_phone">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Loại mặt hàng</label>
+					<div class="col-sm-10"><input class="form-control"  placeholder="Tên mặt hàng vận chuyển"  ng-model="product_name"></div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label"></label>
+					<div class="col-sm-10">
+						<div class="col-sm-4">
+							<label class="tns-sm-4  control-label">Trọng lượng</label>
+							<div class="tns-sm-6">
+								<input class="form-control" placeholder="Trọng lượng KG"  ng-model="mass" type="number">
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label class="tns-sm-4  control-label">Số lượng</label>
+							<div class="tns-sm-6"><input class="form-control" type="number" placeholder="Số lượng"  ng-model="count"></div>
+						</div>
+						<div class="col-sm-4">
+							<label class="tns-sm-4  control-label">Số khối</label>
+							<div class="tns-sm-6"><input class="form-control" type="number" placeholder="Số khối"  ng-model="volume"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label"></label>
+					<div class="col-sm-10">
+						<div class="col-sm-6">
+							<label class="tns-sm-4 control-label">Đơn giá</label>
+							<div class="tns-sm-4"><input class="form-control"  ng-model="unit_number" type="number"></div><div class="col-sm-1"><label class="a-line">/</label></div>
+							<div class="tns-sm-4"><input class="form-control" type="text" placeholder="Đơn vị tính"  ng-model="unit"></div>
+						</div>
+						<div class="col-sm-6">
+							<label class="tns-sm-4 control-label">Tiền hàng</label>
+							<div class="tns-sm-12"><input class="form-control" placeholder="Tiền hàng"  ng-model="product_price" ng-change="changeprice()" type="number"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Tạm ứng</label>
+					<div class="col-sm-10"><input class="form-control"  placeholder="Tiền tạm ứng"  ng-model="advance_price" type="number"></div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label"></label>
+					<div class="col-sm-10">
+						<div class="col-sm-4">
+							<label class="col-sm-4 control-label">Lấy tận nơi</label>
+							<div class="col-sm-6"><input class="form-control" placeholder="Phí lấy hàng"  ng-model="pickup_price" ng-change="changeprice()" type="number"></div>
+						</div>
+						<div class="col-sm-4">
+							<label class="col-sm-4 control-label">Giao tận nơi</label>
+							<div class="col-sm-6"><input class="form-control"  placeholder="Phí giao hàng"  ng-model="drop_price" ng-change="changeprice()" type="number"></div>
+						</div>
+						<div class="col-sm-4">
+							<label class="col-sm-4 control-label">Bao phụ phí</label>
+							<div class="col-sm-6"><input  type="checkbox"  ng-model="surcharge_fee" class="tns_check"  ng-true-value="1" ng-false-value="0" ng-change="changeprice()"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Phí vận chuyển</label>
+					<div class="col-sm-10"><input class="form-control"  type="number" ng-model="transport_price" readonly="true"></div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Tổng thanh toán</label>
+					<div class="col-sm-10"><input class="form-control"  type="text"  ng-model="price" readonly="true"></div>
+				</div>
+
+				
+		</form>
+
+		<div class="panel">
+			<button class="btn btn-block btn-primary btn-sm" ng-click="saveOrder()">Lưu</button>
+		</div>
+
+	</div>
+</section>
+</div>

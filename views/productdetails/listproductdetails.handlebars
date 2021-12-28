@@ -1,0 +1,53 @@
+<div ng-controller="productdetailsController">
+<section class="content-header">
+	<h1>Thuộc tính sản phẩm</h1>
+	<ol class="breadcrumb">
+		<li><a><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+		<li><a></i>Thuộc tính sản phẩm</a></li>
+	</ol>
+</section>
+
+<section class="panel panel-inverse">
+	<div class="row">
+		<div class="panel-body">
+			<button class="btn btn-primary m-r-5 m-b-5" ng-click="openaddproductdetails(0)">Thêm loại sản phẩm</button>
+		</div>
+			<table class="table">
+		        <thead>
+		            <tr>
+		                <th width="25px">#</th>
+		                <th>Tên loại sản phẩm</th>
+		                <th>Số lượng</th>
+		                <th width="20px"></th>
+		                <th width="20px"></th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr ng-repeat="album in albumList">
+		                <td>{[{$index + 1}]}</td>
+		                <td><a href="#" ng-click="openeditproductdetails(album._id)">{[{album.name}]}</a></td>
+		                <td><span>{[{album.productcount}]}</span></td>
+		                <td>
+		                    <a href="#" ng-click="openeditproductdetails(album._id)">
+		                        <i class="icon-pencil"></i>
+		                    </a>
+		                </td>
+		                <td>
+		                	<a ng-click="delDriver(album._id)" >
+		                        <i class="icon-remove-circle"></i>
+		                    </a>
+		                </td>
+		            </tr>
+		        </tbody>
+    		</table>
+    	<div id="example2_paginate" class="dataTables_paginate paging_simple_numbers">
+    		<ul class="pagination">
+    		<li ng-repeat="item in pagedata">
+            		<a href="/administrator/listdriver/{[{item}]}">{[{item}]}</a>
+        		</li>
+    		</ul>
+    	</div>
+	</div>
+	
+</section>
+</div>

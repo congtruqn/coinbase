@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+  <meta content="{{description}}" name="description">
+	<link rel="stylesheet" href="/layout/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/layout/css/style.css" />
+  <link rel="stylesheet" href="/layout/css/addon.css" />
+  <link rel="stylesheet" href="/layout/css/responsive.css" />
+  <link rel="stylesheet" href="/layout/css/jcarousel.responsive.css" />
+  <script type="text/javascript" src="/layout/js/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="/layout/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/layout/js/jquery.reveal.js"></script>
+  <script type="text/javascript" src="/layout/js/jcarousel.responsive.js"></script>
+  <script type="text/javascript" src="/layout/js/jquery.jcarousel.min.js"></script>
+
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, user-scalable=0, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
+  <link href="/css/font-awesome.min.css" rel="stylesheet" />
+  <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500&subset=vietnamese">
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-127064095-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5bbab08eb033e9743d02ae6a/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
+<!--End of Tawk.to Script-->
+</head>
+<body class="cms-index-index cms-demo3">
+	<div class="wrapper">
+    <div id="header"><!--Header-->
+      <div class="container">
+          <div class="content-logo col-md-3 col-sm-12 col-xs-12">
+            <div class="header-logo">
+              <a class="logo" title="Giày đá bóng chính hãng" href="/">
+                <img class="img-responsive" alt="Giày đá bóng chính hãng" src="/images/logo.png">
+              </a>
+            </div>
+          </div>
+          <div id="top-links" class="nav pull-right">
+            <div class="hotline">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              HOTLINE: 0923 274747
+            </div>
+            <a href="#" class="big-link" data-reveal-id="myModal" data-animation="fade">
+              Đăng ký
+            </a>
+          </div>
+      </div>
+    </div>
+    <div class="navition"><!--Header-->
+      <div class="container">
+        {{> navition}}
+      </div>
+    </div>
+
+    <div class="content" id="content">
+      <div>
+          {{{body}}}
+      </div>
+      
+    </div>
+
+      <footer class="footer">
+          {{> footer}}
+      </footer>
+
+    </div> <!-- /container -->
+    <div id="myModal" class="reveal-modal">
+        <div id="register_info">
+          <div>Ngay sau khi nhận được thông tin đăng ký, chúng tôi sẽ liên hệ trực tiếp với bạn để cung cấp tài khoản,
+    Không cài đặt, không rủi ro</div>
+          <div class="form-group">
+            <p class="col-md-3 control-label">Họ và tên</p>
+            <div class="col-md-9">
+              <input class="form-control" id="name" name ="name" required="true"placeholder="Họ và tên">
+            </div>
+          </div>
+         <div class="form-group">
+            <p class="col-md-3 control-label">Điện thoại</p>
+            <div class="col-md-9">
+              <input class="form-control" id="phone" name ="phone" placeholder="Điện thoại">
+            </div>
+          </div>
+         <div class="form-group">
+            <p class="col-md-3 control-label">Email</p>
+            <div class="col-md-9">
+              <input class="form-control" id="email" name ="email" required="true" placeholder="Email">
+            </div>
+          </div>
+         <div class="form-group">
+            <p class="col-md-3 control-label">Mã số thuế</p>
+            <div class="col-md-9">
+              <input class="form-control" id="taxcode" name ="taxcode" required="true" placeholder="Mã số thuế">
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btnsubmitform" style="background: #cc2b00;height: 45px;color: #fff;border:0; outline:none; width:100%;" type="button" onclick="sent()">ĐĂNG KÝ NGAY</button>
+          </div>
+      </div>
+      <div id="thank">
+        <img src="/images/check-mark-png-red-ok-22.png">
+        Cảm ơn bạn đã đăng ký thông tin<br>
+        Nhân viên hỗ trợ của chúng tôi sẽ liên hệ lại <br>
+        Trong 1 giờ làm việc
+      </div>
+      <a class="close-reveal-modal">×</a>
+    </div>
+<script type="text/javascript">
+        function sent() {
+          var name = document.getElementById('name').value;
+          var phone = document.getElementById('phone').value;
+          var email = document.getElementById('email').value;
+          var taxcode = document.getElementById('taxcode').value;
+          var dataString = 'name='+name+'&email='+email+'&phone='+phone+'&taxcode='+taxcode;
+          //alert(dataString);
+          if(email==""||phone==""||name==""||taxcode==""){
+              alert('Bạn vui lòng nhập đầy đủ thông tin');
+          }
+          else{
+            $.ajax({
+                    type: "POST",
+                    url: '/sentmail?'+dataString,
+                    data: { email: email },
+                    success: function (result) {
+                      document.getElementById("register_info").style.display = "none";
+                      document.getElementById("thank").style.display = "block";
+                         //alert(result);
+                    }
+                });
+          }
+          
+        }
+</script>
+</body>
+<!-- Google Code dành cho Thẻ tiếp thị lại -->
+<!--------------------------------------------------
+Không thể liên kết thẻ tiếp thị lại với thông tin nhận dạng cá nhân hay đặt thẻ tiếp thị lại trên các trang có liên quan đến danh mục nhạy cảm. Xem thêm thông tin và hướng dẫn về cách thiết lập thẻ trên: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 854526823;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/854526823/?guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</html>
