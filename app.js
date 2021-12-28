@@ -105,7 +105,7 @@ const options = {
   keepAliveInitialDelay: 300000,
   useNewUrlParser: true
 };
-var db = mongoose.connect("mongodb://210.211.108.228/coinbase");
+var db = mongoose.connect("mongodb://210.211.108.228/coinbase",options);
 app.use(function (req, res, next) {
     if (!req.user) {
       res.render('user/login', { title: 'Login', layout: 'login' });
