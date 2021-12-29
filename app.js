@@ -18,16 +18,13 @@ var app = express();
 var index = require('./routes/index');
 var filemanager = require('./routes/filemanager');
 var users = require('./routes/users');
-var products = require('./routes/products');
-var productdetails = require('./routes/productdetails');
 var register = require('./routes/register');
-var orders = require('./routes/orders');
-var producttypes = require('./routes/producttypes');
-var report = require('./routes/report');
+
+
 var newscats = require('./routes/newscats');
 var newspages = require('./routes/newspages');
 var newscats = require('./routes/newscats');
-var bannercats = require('./routes/bannercats');
+var products = require('./routes/products');
 var newscontents = require('./routes/newscontents');
 var banners = require('./routes/banners');
 global.__basedir = __dirname;
@@ -90,20 +87,19 @@ app.use(function (req, res, next) {
 });
 app.use('/', index);
 app.use('/user', users);
-app.use('/products', products);
 var mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 const options = {
-  user:"coinbase",
+  user:"redcoin",
   pass:"Tru205649601@",
   keepAlive: true,
   keepAliveInitialDelay: 300000,
   useNewUrlParser: true
 };
-var db = mongoose.connect("mongodb://210.211.108.228/coinbase",options);
+var db = mongoose.connect("mongodb://14.225.192.200/redcoin",options);
 app.use(function (req, res, next) {
     if (!req.user) {
       res.render('user/login', { title: 'Login', layout: 'login' });
@@ -113,16 +109,12 @@ app.use(function (req, res, next) {
 });
 app.use('/newscats', newscats);
 app.use('/filemanager', filemanager);
-app.use('/productdetails', productdetails);
 app.use('/register', register);
-app.use('/orders', orders);
-app.use('/producttypes', producttypes);
-app.use('/report', report);
 app.use('/newscats', newscats);
 app.use('/newspages', newspages);
 app.use('/newscontents', newscontents);
 app.use('/banners', banners);
-app.use('/bannercats', bannercats);
+app.use('/products', products);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

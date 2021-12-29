@@ -5,11 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var per_page = 15;
 var fs = require('fs');
 var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
-var Products = require('../models/products');
-var Stocks = require('../models/stocks');
 
-var elastic = require('../models/elasticsearch');
 // Register
 router.get('/addproducts', function(req, res){
 	res.render('products/addproducts',{layout: false});
@@ -17,25 +13,7 @@ router.get('/addproducts', function(req, res){
 router.get('/sales', function(req, res){
   res.render('products/sales',{layout: false});
 });
-router.get('/kill', function(req, res){
-  Products.getProductsById(1, function(err, companys) {
-      if(err) throw err;
-    res.json(companys);
-  });  
-  res.render('products/sales',{layout: false});
-});
-router.get('/editproducts', function(req, res){
-  res.render('products/editproducts',{layout: false});
-});
-router.get('/listproducts', function(req, res){
-	res.render('products/listproducts',{layout: false});
-});
-router.get('/images', function(req, res){
-  res.render('products/images',{layout: false});
-});
-router.get('/searchs', function(req, res){
-  res.render('products/search',{layout: false});
-});
+
 router.post('/upload',function(req, res) {
     var imageName = req.files.file.name
     if(!imageName){
@@ -50,7 +28,7 @@ router.post('/upload',function(req, res) {
       });
       
     }
-  });
+});
 
 router.post('/addproductres', function(req, res){
   var create_date = new Date().getTime();
@@ -235,93 +213,7 @@ router.get('/getproductsinfo/:id', function(req, res){
     res.json(companys);
     });
 });
-router.get('/getstocksinfo/:id', function(req, res){
-  var id = req.params.id;
-  Stocks.getStocksById(id, function(err, companys) {
-      if(err) throw err;
-    res.json(companys);
-    });
-});
 
-router.get('/getallproducts', function(req, res){
-  var page = req.param('page','1');
-  var usertype = req.user.type;
-  var userid = req.user._id;
-  if(usertype==1||usertype==2){
-    Products.getAllProducts(page,per_page,function(err, companys){
-      if(err) throw err;
-      res.json(companys);
-    });
-  }
-  else{
-    Products.getAllProductsByUser(userid,page,per_page,function(err, companys){
-      if(err) throw err;
-      res.json(companys);
-    });
-  }
-});
-router.post('/searchproduct', function(req, res){
-  var query = req.body.keyword;
-  console.log("/.*"+query+"*/");
-   Stocks.Searchs("/"+query+"/",function(err, companys){
-    res.send(companys);
-   });
-});
-router.get('/getmaxproductcode', function(req, res){
-  Products.countMaxProductCode(function(err, companys){
-    if(companys){
-      if(Number(companys.product_code_count)<9){
-        var jsons = {
-          maxordercode:companys.product_code_count,
-          ordercode:'SP00000'+(Number(companys.product_code_count)+1),
-        }
-        res.json(jsons);
-      }
-      else if(Number(companys.product_code_count)<99&&Number(companys.product_code_count)>=9){
-        var jsons = {
-          maxordercode:companys.product_code_count,
-          ordercode:'SP0000'+(Number(companys.product_code_count)+1),
-        }
-        res.json(jsons);
-      }
-      else if(Number(companys.product_code_count)<999&&Number(companys.product_code_count)>=99){
-        var jsons = {
-          maxordercode:companys.product_code_count,
-          ordercode:'SP000'+(Number(companys.product_code_count)+1),
-        }
-        res.json(jsons);
-      }
-      else if(Number(companys.product_code_count)<9999&&Number(companys.product_code_count)>=999){
-        var jsons = {
-          maxordercode:companys.product_code_count,
-          ordercode:'SP00'+(Number(companys.product_code_count)+1),
-        }
-        res.json(jsons);
-      }
-      else if(Number(companys.product_code_count)<99999&&Number(companys.product_code_count)>=9999){
-        var jsons = {
-          maxordercode:companys.product_code_count,
-          ordercode:'SP0'+(Number(companys.product_code_count)+1),
-        }
-        res.json(jsons);
-      }
-      else if(Number(companys.product_code_count)<999999&&Number(companys.product_code_count)>=99999){
-        var jsons = {
-          maxordercode:companys.product_code_count,
-          ordercode:'SP'+(Number(companys.product_code_count)+1),
-        }
-        res.json(jsons);
-      }
-      
-    }
-    else{
-      var jsons = {
-          maxordercode:0,
-          ordercode:'SP000001',
-        }
-        res.json(jsons);
-    } 
-  });
-});
+
 
 module.exports = router;

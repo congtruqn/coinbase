@@ -9,7 +9,6 @@ var NewsContents = require('../models/newscontents');
 var NewsCats = require('../models/newscats');
 var Seourls = require('../models/seourl');
 var banners = require('../models/banners');
-var bannercats = require('../models/bannercats');
 router.get('/', function(req, res, next) {
   //getAllNewsContentsBycatCount
   NewsContents.getAllNewsContentsBycatCount('5bb314a96f96090f587ac5f1',3,function(err, conten){
