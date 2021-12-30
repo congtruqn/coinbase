@@ -13,14 +13,19 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+var cors = require('cors')
 
 var app = express();
+app.use(cors())
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 var index = require('./routes/index');
 var filemanager = require('./routes/filemanager');
 var users = require('./routes/users');
 var register = require('./routes/register');
-
-
 var newscats = require('./routes/newscats');
 var newspages = require('./routes/newspages');
 var newscats = require('./routes/newscats');
@@ -28,15 +33,9 @@ var products = require('./routes/products');
 var newscontents = require('./routes/newscontents');
 var banners = require('./routes/banners');
 global.__basedir = __dirname;
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
-
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout:'layout'}));
 app.set('view engine', 'handlebars');
-
-// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -50,13 +49,9 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
-
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 // Express Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -132,5 +127,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;
