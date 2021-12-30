@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+var cors = require('cors')
 /* GET home page. */
 var newspages = require('../models/newspages');
 router.get('/', function(req, res, next) {
@@ -103,13 +104,13 @@ router.get('/lien-he', function(req, res, next) {
 router.get('/bang-gia', function(req, res, next) {
   res.render('content/price', { title: 'Bảng giá - Cty CP hóa đơn điện tử Vi Na',layout: 'public' });
 });
-router.get('/getallproject', function(req, res){
+router.get('/getallproject',cors(), function(req, res){
   newspages.getallproject(function(err, producttypess){
       if(err) throw err;
       res.json(producttypess);
   });
 });
-router.get('/getproject/:url', function(req, res){
+router.get('/getproject/:url',cors(), function(req, res){
   var url = req.params.url;
   newspages.getprojectbyurl(url,function(err, producttypess){
       if(err) throw err;
