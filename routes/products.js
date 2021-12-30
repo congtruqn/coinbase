@@ -4,7 +4,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var per_page = 15;
 var fs = require('fs');
-var multipart = require('connect-multiparty');
 
 // Register
 router.get('/addproducts', function(req, res){

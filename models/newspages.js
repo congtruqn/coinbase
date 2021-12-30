@@ -74,7 +74,14 @@ module.exports.getAllNewsPages = function(page,per_page,callback){
 	var query = {};
 	NewsPages.find(query, callback).skip(per_page * (page - 1)).limit(per_page).sort({'create_date': -1 });
 }
-
+module.exports.getallproject = function(callback){
+	var query = {};
+	NewsPages.find(query, callback).sort({'create_date': -1 });
+}
+module.exports.getprojectbyurl = function(url, callback){
+	var query = {seo_url:url};
+	NewsPages.findOne(query, callback);
+}
 module.exports.countNewsPages = function(callback){
 	var query = {};
 	NewsPages.count(query, callback);

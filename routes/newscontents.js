@@ -29,12 +29,6 @@ router.get('/getallnewscontent', function(req, res){
       res.json(producttypess);
   });
 });
-router.get('/getallproducttypesnotpage', function(req, res){
-  producttypes.getAllproducttypesNotPage(function(err, producttypess){
-    if(err) throw err;
-    res.json(producttypess);
-  });
-});
 router.get('/getnewscontentinfo', function(req, res){
   var id = req.param('id');
   NewsContents.getNewsContentsById(id, function(err, producttypess) {
@@ -42,8 +36,6 @@ router.get('/getnewscontentinfo', function(req, res){
       res.json(producttypess);
     });
 });
-
-
 router.post('/addnewscontentsres', function(req, res){
   var create_date = new Date().getTime();
   var name = req.body.name;

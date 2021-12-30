@@ -1,12 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
-var multer  =   require('multer');
 var fs = require('fs')
 var crypto = require('crypto');
-var multipart = require('connect-multiparty');
 const path = require('path');
-var multipartMiddleware = multipart();
 /* GET home page. */
 
 router.get('/browser', function(req, res, next) {
@@ -43,6 +40,7 @@ router.get('/browser', function(req, res, next) {
     for (let item of images){
       if(item.split('.').pop() === 'png'
       || item.split('.').pop() === 'jpg'
+      || item.split('.').pop() === 'gif'
       || item.split('.').pop() === 'JPG'
       || item.split('.').pop() === 'PNG'
       || item.split('.').pop() === 'JPEG'
@@ -62,6 +60,7 @@ router.get('/browser', function(req, res, next) {
   for (let item of images_dir){
       if(item.split('.').pop() === 'png'
       || item.split('.').pop() === 'jpg'
+      || item.split('.').pop() === 'gif'
       || item.split('.').pop() === 'JPG'
       || item.split('.').pop() === 'PNG'
       || item.split('.').pop() === 'JPEG'
@@ -100,24 +99,19 @@ router.get('/getallfolder', function(req, res, next) {
       });
   });
 });
-router.post('/uploadimage', multipartMiddleware,function(req, res) {
+router.post('/uploadimage',function(req, res) {
   var rootdir = req.param('folder','/');
-  fs.readFile(req.files.file.path, function (err, data) {
-    var imageName = req.files.file.name
-    
-    // If there's an error
-    if(!imageName){
+  var imageName = req.files.file.name
+  if(!imageName){
+    res.status(200).json({imagesname:0})
+  } else {
+    let sampleFile = req.files.file;
+    var newPath=__basedir+"/public/uploads/"+rootdir+'/'+imageName;
+    sampleFile.mv(newPath, function(err) {
       res.redirect('back');
-    } else {
-      var newPath=__basedir+"/public/uploads/"+rootdir+'/'+imageName;
-      // write file to uploads/fullsize folder
-      fs.writeFile(newPath, data, function (err) {
-        // let's see it
-        res.redirect('back');
-        //res.redirect("/public/uploads/" + imageName);
-      });
-    }
-  });
+    });
+    
+  }
 });
 //delete file
 router.post('/deleteimages', function(req, res, next){
